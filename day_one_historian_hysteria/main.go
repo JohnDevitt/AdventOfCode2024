@@ -7,13 +7,6 @@ import (
 	"strings"
 )
 
-func absoluteDifference(x, y int) int {
-	if x < y {
-		return y - x
-	}
-	return x - y
-}
-
 func buildLists() ([]int, []int) {
 	lines := utils.ReadLines("day_one_historian_hysteria/input.txt")
 
@@ -22,8 +15,7 @@ func buildLists() ([]int, []int) {
 		numbers := strings.Fields(line)
 		start, _ := strconv.Atoi(numbers[0])
 		end, _ := strconv.Atoi(numbers[1])
-		left = append(left, start)
-		right = append(right, end)
+		left, right = append(left, start), append(right, end)
 	}
 
 	return left, right
@@ -37,7 +29,7 @@ func partOne() int {
 
 	sum := 0
 	for index, leftNum := range left {
-		sum += absoluteDifference(right[index], leftNum)
+		sum += utils.AbsoluteDifference(right[index], leftNum)
 	}
 
 	return sum
